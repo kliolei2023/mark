@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -275,20 +274,24 @@
             word-break: break-word; /* 長單詞換行 */
         }
 
-        /* 修正：皇冠固定在頭頂上方，不遮擋 */
+        /* 修正：皇冠固定在頭頂上方，強行校正位置 */
         .winner-item .winner-crown {
             position: absolute;
-            top: 0px; /* 固定在容器頂部 */
+            top: -50px; /* 強制移到上方 */
             left: 50%;
-            margin-left: -50px; /* 置中微調 */
+            margin-left: 0;
             font-size: 50px;
-            transform: rotate(-25deg);
+            transform: translateX(-50%) rotate(-25deg); /* 使用 transform 校正置中 */
             z-index: 4;
             animation: floatCrown 2s infinite ease-in-out;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
             pointer-events: none;
         }
-        @keyframes floatCrown { 0%, 100% { transform: rotate(-25deg) translateY(0); } 50% { transform: rotate(-25deg) translateY(-10px); } }
+        /* 修正動畫：確保動畫過程中保持水平置中 translateX(-50%) */
+        @keyframes floatCrown { 
+            0%, 100% { transform: translateX(-50%) rotate(-25deg) translateY(0); } 
+            50% { transform: translateX(-50%) rotate(-25deg) translateY(-10px); } 
+        }
 
         .winner-title {
             color: #e65100; /* 深橘色，在淺背景對比好 */
@@ -729,8 +732,13 @@
                 const duckDiv = document.getElementById(`duck-${student.id}`);
                 if (!duckDiv) return;
 
-                let targetPercent = ((student.raceScore - minScore) / scoreRange) * 85 + 5;
-                if(maxScore === minScore) targetPercent = 90; 
+                // 修正：調整百分比計算，原先 *85+5 改為 *92+3 以讓滿分能到達 100 刻度
+                // 3% 是起點，95% 是終點 (對應右邊的刻度)
+                let targetPercent = ((student.raceScore - minScore) / scoreRange) * 92 + 3;
+                
+                // 如果大家都同分(max=min)，直接移動到終點附近
+                if(maxScore === minScore) targetPercent = 95;
+                
                 if(targetPercent < 5) targetPercent = 5;
 
                 let calculatedPos = 0;
