@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 獅先生_成績賽跑 🏆</title>
+    <title>🏆 獅先生_成績表大亂鬥 🏆</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         :root {
@@ -311,7 +312,7 @@
     <canvas id="confettiCanvas"></canvas>
 
     <header>
-        <h1 id="pageTitle">🦆  獅先生_成績表大亂鬥</h1>
+        <h1 id="pageTitle">🦆 獅先生_成績表大亂鬥</h1>
     </header>
 
     <div id="muteBtn" onclick="toggleMute()">🔊</div>
@@ -329,7 +330,7 @@
         <div class="setting-group">
             <label>🎨 場景主題:</label>
             <select id="themeSelect" onchange="changeTheme()">
-                <option value="duck">🐥 經典鴨子</option>
+                <option value="duck">🐥 小鴨子</option>
                 <option value="ocean">🌊 海洋派對 (船隻)</option>
                 <option value="space">🚀 太空漫遊 (太空人)</option>
                 <option value="race">🏎️ 賽車競技 (賽車)</option>
@@ -344,12 +345,12 @@
         </div>
 
         <div class="setting-group">
-            <label for="durationRange">⏱️ 懸疑時間: <span id="durationValue" style="color:#d81b60;">10</span> 秒</label>
+            <label for="durationRange">⏱️ 猜猜模式移動時間: <span id="durationValue" style="color:#d81b60;">10</span> 秒</label>
             <input type="range" id="durationRange" min="1" max="20" value="10" oninput="document.getElementById('durationValue').innerText = this.value">
         </div>
         
-        <button class="btn-mode1" onclick="startRace('suspense'); toggleMenu();">🏁 2. 開始懸疑衝刺</button>
-        <button class="btn-mode2" onclick="startRace('direct'); toggleMenu();">▶️ 3. 直觀模式 (定格)</button>
+        <button class="btn-mode1" onclick="startRace('suspense'); toggleMenu();">🏁 2. 猜猜模式(推薦)</button>
+        <button class="btn-mode2" onclick="startRace('direct'); toggleMenu();">▶️ 3. 直觀模式 </button>
         <button class="btn-rank" onclick="showLeaderboard(); toggleMenu();">🏆 4. 查看排行榜</button>
         <button class="btn-reset" onclick="resetRace(); toggleMenu();">🔄 重置位置</button>
     </div>
@@ -475,7 +476,7 @@
         currentTheme = select.value;
         document.body.className = `theme-${currentTheme}`;
         
-        const titles = {duck: "🦆 鴨子大亂鬥", ocean: "🌊 海洋大亂鬥", space: "🚀 太空大亂鬥", race: "🏎️ 賽車大亂鬥"};
+        const titles = {duck: "🦆 小鴨子大亂鬥", ocean: "🌊 海洋大亂鬥", space: "🚀 太空大亂鬥", race: "🏎️ 賽車大亂鬥"};
         document.getElementById('pageTitle').innerText = titles[currentTheme];
 
         initParticles();
